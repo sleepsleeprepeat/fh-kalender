@@ -1,5 +1,7 @@
 /__pycache__
+/input
 
 credentials.json
 token.json
 output.json
+modules.json

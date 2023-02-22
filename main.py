@@ -12,90 +12,17 @@ CATEGORY_EXERCISES = ["-Ü", "Ü-"]
 
 @dataclass
 class Event:
+    title: str
+    category: str
+    degree: str
+    semester: int
+    group: int
     start: datetime
     end: datetime
     rooms: list[str]
 
 
-@dataclass
-class Module:
-    title: str
-    category: str
-    members: list[(str, int, int)]  # degree, semester, group
-    events: list[Event]
-
-
-def studentplans_to_json(path):
-    modules: list[Module] = []
-
-    # loop over all studentplans in path
-    for studentplan in os.listdir(path):
-        print(studentplan)
-        # combine duplicate modules
-        new_modules = parse_studentplan(path + studentplan)
-        for new_module in new_modules:
-            module = next((x for x in modules if x.title == new_module.title), None)
-            if module:
-                # check if event already exists
-                for new_event in new_module.events:
-                    event = next(
-                        (x for x in module.events if x.start == new_event.start), None
-                    )
-                    if not event:
-                        module.events.append(new_event)
-
-                # check if member already exists
-                for new_member in new_module.members:
-                    member = next((x for x in module.members if x == new_member), None)
-                    if not member:
-                        module.members.append(new_member)
-
-            else:
-                modules.append(new_module)
-
-    # convert to json
-    json_modules = []
-    for module in modules:
-        json_events = []
-        for event in module.events:
-            json_events.append(
-                {
-                    "start": event.start.strftime("%Y-%m-%dT%H:%M:%S"),
-                    "end": event.end.strftime("%Y-%m-%dT%H:%M:%S"),
-                    "rooms": event.rooms,
-                }
-            )
-
-        json_members = []
-        for member in module.members:
-            json_members.append(
-                {"degree": member[0], "semester": member[1], "group": member[2]}
-            )
-
-        json_modules.append(
-            {
-                "title": module.title,
-                "category": module.category,
-                "members": json_members,
-                "events": json_events,
-            }
-        )
-
-    with open("modules.json", "w") as f:
-        json.dump(json_modules, f, indent=4)
-
-
-def parse_studentplan(path) -> list[Module]:
-    pdf = pdfplumber.open(path)
-
-    modules = []
-    for page in pdf.pages:
-        modules.extend(parse_studentplan_page(page))
-
-    return modules
-
-
-def parse_studentplan_page(page: Page) -> list[Module]:
+def parse_studentplan_page(page: Page) -> list[Event]:
     text = page.extract_text()
     table = page.extract_table()
 
@@ -121,7 +48,7 @@ def parse_studentplan_page(page: Page) -> list[Module]:
     for row in table:
         blocks.extend(parse_row(row))
 
-    modules = []
+    events = []
     for block in blocks:
 
         # parse rooms
@@ -133,33 +60,49 @@ def parse_studentplan_page(page: Page) -> list[Module]:
         block_end = timerange[block.end]
         block_day = WEEKDAYS.index(block.day)
 
-        events = []
+        # parse weeknums
+        dates = []
         for weeknum in weeknums:
             start_str = f"{year} {weeknum} {block_day} {block_start}"
             start = datetime.strptime(start_str, "%Y %W %w %H:%M")
 
             end_str = f"{year} {weeknum} {block_day} {block_end}"
             end = datetime.strptime(end_str, "%Y %W %w %H:%M")
+            dates.append((start, end))
 
-            event = Event(start, end, rooms)
-            events.append(event)
-
+        # parse category
         category = "Vorlesung"
         if any(x in block.text for x in CATEGORY_LAB):
             category = "Labor"
         elif any(x in block.text for x in CATEGORY_EXERCISES):
             category = "Übung"
 
-        module = next((x for x in modules if x.title == degree), None)
-        if module:
-            module.events.extend(events)
-        else:
-            module = Module(block.text, category, [(degree, semester, group)], events)
-            modules.append(module)
+        for date in dates:
+            start, end = date
+            event = Event(
+                title=block.text,
+                category=category,
+                degree=degree,
+                semester=semester,
+                group=group,
+                start=start,
+                end=end,
+                rooms=rooms,
+            )
+            events.append(event)
 
-    return modules
+    return events
 
 
 if __name__ == "__main__":
     path = "./input/SS_23/"
-    studentplans_to_json(path)
+
+    events = []
+    for file in os.listdir(path):
+        print(f"Processing {file}")
+        pdf = pdfplumber.open(path + file)
+
+        for page in pdf.pages:
+            events.extend(parse_studentplan_page(page))
+
+    print(f"Found {len(events)} events")
