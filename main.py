@@ -1,8 +1,9 @@
 from datetime import datetime
 import os
+import csv
+import sqlite3
 import pdfplumber
-from pdfplumber.page import Page
-import json
+
 from fh_plan import *
 
 WEEKDAYS = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
@@ -20,9 +21,10 @@ class Event:
     start: datetime
     end: datetime
     rooms: list[str]
+    source: str
 
 
-def parse_studentplan_page(page: Page) -> list[Event]:
+def parse_studentplan_page(page) -> list[Event]:
     text = page.extract_text()
     table = page.extract_table()
 
@@ -54,6 +56,7 @@ def parse_studentplan_page(page: Page) -> list[Event]:
         # parse rooms
         pattern = r"C\d\d-\d.\d\d"
         rooms = re.findall(pattern, block.text)
+        rooms.extend([""] * (5 - len(rooms)))
 
         # parse start and end
         block_start = timerange[block.start]
@@ -88,6 +91,7 @@ def parse_studentplan_page(page: Page) -> list[Event]:
                 start=start,
                 end=end,
                 rooms=rooms,
+                source=f"{header} [Seite: {page.page_number}]",
             )
             events.append(event)
 
@@ -106,3 +110,33 @@ if __name__ == "__main__":
             events.extend(parse_studentplan_page(page))
 
     print(f"Found {len(events)} events")
+
+    con = sqlite3.connect("fh.db")
+    cur = con.cursor()
+
+    cur.execute("DROP TABLE IF EXISTS events")
+
+    cur.execute(
+        "CREATE TABLE IF NOT EXISTS events (id INTEGER PRIMARY KEY, title TEXT, category TEXT, degree TEXT, semester TEXT, sem_group TEXT, start DATETIME, end DATETIME, room1 TEXT, room2 TEXT, room3 TEXT, room4 TEXT, room5 TEXT, source TEXT)"
+    )
+
+    for event in events:
+        cur.execute(
+            "INSERT INTO events (title, category, degree, semester, sem_group, start, end, room1, room2, room3, room4, room5, source) VALUES (?, ? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (
+                event.title,
+                event.category,
+                event.degree,
+                event.semester,
+                event.group,
+                event.start,
+                event.end,
+                *event.rooms,
+                event.source,
+            ),
+        )
+
+    con.commit()
+    con.close()
+
+    print("Done")
