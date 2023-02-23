@@ -1,7 +1,9 @@
 from datetime import datetime
+import json
 import os
 import csv
 import sqlite3
+import threading
 import pdfplumber
 
 from fh_plan import *
@@ -13,6 +15,30 @@ CATEGORY_EXERCISES = ["-Ü", "Ü-"]
 
 @dataclass
 class Event:
+    start: datetime
+    end: datetime
+    rooms: list[str]
+
+
+@dataclass
+class Module:
+    title: str
+    short: str
+    lectures: list[Event]
+    exercises: list[Event]
+    labs: list[Event]
+
+
+@dataclass
+class StudentPlan:
+    degree: str
+    semester: int
+    group: str
+    modules: list[Module]
+
+
+@dataclass
+class RawEvent:
     title: str
     category: str
     degree: str
@@ -24,7 +50,7 @@ class Event:
     source: str
 
 
-def parse_studentplan_page(page) -> list[Event]:
+def parse_studentplan_page(page) -> list[RawEvent]:
     text = page.extract_text()
     table = page.extract_table()
 
@@ -54,9 +80,8 @@ def parse_studentplan_page(page) -> list[Event]:
     for block in blocks:
 
         # parse rooms
-        pattern = r"C\d\d-\d.\d\d"
+        pattern = r"C\d\d-\d?\w?.\d\d"
         rooms = re.findall(pattern, block.text)
-        rooms.extend([""] * (5 - len(rooms)))
 
         # parse start and end
         block_start = timerange[block.start]
@@ -82,7 +107,7 @@ def parse_studentplan_page(page) -> list[Event]:
 
         for date in dates:
             start, end = date
-            event = Event(
+            event = RawEvent(
                 title=block.text,
                 category=category,
                 degree=degree,
@@ -101,42 +126,138 @@ def parse_studentplan_page(page) -> list[Event]:
 if __name__ == "__main__":
     path = "./input/SS_23/"
 
-    events = []
+    raw_events = []
     for file in os.listdir(path):
-        print(f"Processing {file}")
+        print(f"Processing {path+file}")
         pdf = pdfplumber.open(path + file)
 
         for page in pdf.pages:
-            events.extend(parse_studentplan_page(page))
+            raw_events.extend(parse_studentplan_page(page))
 
-    print(f"Found {len(events)} events")
+    print(f"Found {len(raw_events)} events")
 
-    con = sqlite3.connect("fh.db")
-    cur = con.cursor()
-
-    cur.execute("DROP TABLE IF EXISTS events")
-
-    cur.execute(
-        "CREATE TABLE IF NOT EXISTS events (id INTEGER PRIMARY KEY, title TEXT, category TEXT, degree TEXT, semester TEXT, sem_group TEXT, start DATETIME, end DATETIME, room1 TEXT, room2 TEXT, room3 TEXT, room4 TEXT, room5 TEXT, source TEXT)"
-    )
-
-    for event in events:
-        cur.execute(
-            "INSERT INTO events (title, category, degree, semester, sem_group, start, end, room1, room2, room3, room4, room5, source) VALUES (?, ? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            (
-                event.title,
-                event.category,
-                event.degree,
-                event.semester,
-                event.group,
-                event.start,
-                event.end,
-                *event.rooms,
-                event.source,
-            ),
+    # create modules and avoid duplicates
+    modules = []
+    plans = []
+    for raw_event in raw_events:
+        event = Event(
+            start=raw_event.start,
+            end=raw_event.end,
+            rooms=raw_event.rooms,
         )
 
-    con.commit()
-    con.close()
+        # create modules and avoid duplicates
+        module = next((x for x in modules if x.title == raw_event.title), None)
+        if module is None:
+            module = Module(
+                title=raw_event.title,
+                short="",
+                lectures=[],
+                exercises=[],
+                labs=[],
+            )
+
+            match raw_event.category:
+                case "Vorlesung":
+                    module.lectures.append(event)
+                case "Übung":
+                    module.exercises.append(event)
+                case "Labor":
+                    module.labs.append(event)
+
+            modules.append(module)
+
+        else:
+            match raw_event.category:
+                case "Vorlesung":
+                    module.lectures.append(event)
+                case "Übung":
+                    module.exercises.append(event)
+                case "Labor":
+                    module.labs.append(event)
+
+    for raw_event in raw_events:
+        # create student plans and avoid duplicates
+        plan = next(
+            (
+                x
+                for x in plans
+                if x.degree == raw_event.degree
+                and x.semester == raw_event.semester
+                and x.group == raw_event.group
+            ),
+            None,
+        )
+        if plan is None:
+            plan = StudentPlan(
+                degree=raw_event.degree,
+                semester=raw_event.semester,
+                group=raw_event.group,
+                modules=[],
+            )
+            plans.append(plan)
+
+        # add modules to student plans if they are not already in there
+        module = next((x for x in modules if x.title == raw_event.title), None)
+        if module not in plan.modules:
+            plan.modules.append(module)
+
+    print(f"Found {len(modules)} modules")
+    print(f"Found {len(plans)} plans")
+
+    # write to json
+    json_str = {
+        "plans": [],
+        "modules": [],
+    }
+
+    for plan in plans:
+        plan_str = {
+            "degree": plan.degree,
+            "semester": str(plan.semester),
+            "group": str(plan.group),
+            "modules": [],
+        }
+
+        for module in plan.modules:
+            t = module.title.replace("\n", " ").strip()
+            plan_str["modules"].append(module.short if module.short else t)
+
+        json_str["plans"].append(plan_str)
+
+    for module in modules:
+        module_str = {
+            "title": module.title,
+            "short": module.short,
+            "lectures": [],
+            "exercises": [],
+            "labs": [],
+        }
+        for lecture in module.lectures:
+            lecture_str = {
+                "start": lecture.start.isoformat(),
+                "end": lecture.end.isoformat(),
+                "rooms": lecture.rooms,
+            }
+            module_str["lectures"].append(lecture_str)
+        for exercise in module.exercises:
+            exercise_str = {
+                "start": exercise.start.isoformat(),
+                "end": exercise.end.isoformat(),
+                "rooms": exercise.rooms,
+            }
+            module_str["exercises"].append(exercise_str)
+        for lab in module.labs:
+            lab_str = {
+                "start": lab.start.isoformat(),
+                "end": lab.end.isoformat(),
+                "rooms": lab.rooms,
+            }
+            module_str["labs"].append(lab_str)
+        json_str["modules"].append(module_str)
+
+    print("Writing to output.json")
+    with open("output.json", "w", encoding="utf-8") as file:
+        json.dump(json_str, file, ensure_ascii=False, indent=4)
 
     print("Done")
