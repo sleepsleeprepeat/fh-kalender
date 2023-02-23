@@ -1,67 +1,37 @@
 import sqlite3
+import json
+
+con = sqlite3.connect("output.db")
+cur = con.cursor()
+
+# get all events
+cur.execute("SELECT * FROM events")
+events = cur.fetchall()
+
+json_events = []
+
+for event in events:
+    # convert to dict
+    event = {
+        "id": event[0],
+        "title": event[1],
+        "category": event[2],
+        "degree": event[3],
+        "semester": event[4],
+        "group": event[5],
+        "start": event[6],
+        "end": event[7],
+        "rooms": [event[8], event[9], event[10], event[11], event[12]],
+    }
+
+    # remove empty rooms
+    event["rooms"] = [room for room in event["rooms"] if room]
+
+    json_events.append(event)
+
+# save to json
+with open("output.json", "w", encoding="utf-8") as f:
+    json.dump(json_events, f, ensure_ascii=False, indent=4)
 
 
-def generate_clean_table():
-    # create table for cleaned events
-    cur.execute("DROP TABLE IF EXISTS events_clean")
-    cur.execute(
-        "CREATE TABLE IF NOT EXISTS events_clean (id INTEGER PRIMARY KEY, title TEXT, category TEXT, degree TEXT, semester TEXT, sem_group TEXT, start DATETIME, end DATETIME, room1 TEXT, room2 TEXT, room3 TEXT, room4 TEXT, room5 TEXT, source TEXT)"
-    )
-
-    # copy over events to new table
-    cur.execute("SELECT * FROM events")
-    for event in cur.fetchall():
-        cur.execute(
-            "INSERT INTO events_clean (title, category, degree, semester, sem_group, start, end, room1, room2, room3, room4, room5, source) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            event[1:],
-        )
-
-
-def export_titles():
-    with open("titles_old.txt", "w", encoding="utf-8") as f:
-        cur.execute("SELECT DISTINCT title FROM events")
-        for title in cur.fetchall():
-            f.write(title[0].replace("\n", " ").strip() + "\n")
-
-
-def replace_titles():
-    with open("titles_old.txt", "r", encoding="utf-8") as f:
-        titles = f.readlines()
-
-    with open("titles_new.txt", "r", encoding="utf-8") as f:
-        new_titles = f.readlines()
-
-    for i in range(len(titles)):
-        titles[i] = titles[i].strip()
-        new_titles[i] = new_titles[i].strip()
-
-    # get all events
-    cur.execute("SELECT * FROM events_clean")
-    events = cur.fetchall()
-
-    # replace titles
-    for idx, event in enumerate(len(events)):
-        striped_title = event[1].replace("\n", " ").strip()
-        events[idx][1] = new_titles[titles.index(event[1])]
-        cur.execute(
-            "UPDATE events_clean SET title = ? WHERE id = ?",
-            (events[idx][1], events[idx][0]),
-        )
-
-
-if __name__ == "__main__":
-    # connect to database
-    con = sqlite3.connect("fh.db")
-    cur = con.cursor()
-
-    # generate_clean_table()
-
-    # export all uqique titles to a file
-    # export_titles()
-
-    # replace titles
-    replace_titles()
-
-    # commit changes
-    con.commit()
-    con.close()
+con.close()

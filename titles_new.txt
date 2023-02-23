@@ -1,223 +1,223 @@
-Mathematik 2 
-Elektrotechnik 2 
-Algorithmen und Datenstrukturen 
-Elektrotechnik 2 Übung
-Mathematik 2 
-Physik 
-Mathematik 2 
-Elektrotechnik 2 
-Werkstoffe, Bauelemente, Halbleiter Labor 
-Mathematik 2 Übung 
-Algorithmen und Datenstrukturen Übung 
-Physik Übung 
-Physik Labor 
-Algorithmen und Datenstrukturen Labor 
-Elektrotechnik 2 Labor 
-Werkstoffe, Bauelemente, Halbleiter Labor 
+Mathematik 2
+Elektrotechnik 2
+Algorithmen und Datenstrukturen
+Elektrotechnik 2 Übung E1
+Mathematik 2
+Physik
+Mathematik 2
+Elektrotechnik 2
+Werkstoffe, Bauelemente, Halbleiter Labor E1
+Mathematik 2
+Algorithmen und Datenstrukturen Übung E1
+Physik Übung E
+Physik Labor E1
+Algorithmen und Datenstrukturen Labor E1
+Elektrotechnik 2 Labor E1
+Werkstoffe, Bauelemente, Halbleiter Labor E1
 Karfreitag
 Ostermontag
-Vertiefungswahl und Vorstellung E-Technik 
+Vertiefungswahl und -vorstellung Elektrotechnik
 Christi Himmelfahrt
 Pfingstmontag
-Elektrotechnik 2 Labor Test 
-Algorithmen und Datenstrukturen Labor 
-Werkstoffe, Bauelemente, Halbleiter Labor 
-Mathematik 2 Übung 
-Physik Labor 
-Algorithmen und Datenstrukturen Übung 
-Werkstoffe, Bauelemente, Halbleiter Labor 
-Elektrotechnik 2 Labor 
-Werkstoffe, Bauelemente, Halbleiter Labor 
-Algorithmen und Datenstrukturen Labor 
-Physik Labor 
-Werkstoffe, Bauelemente, Halbleiter Labor 
-Elektrotechnik 2 Labor 
-Physik Labor 
-Algorithmen und Datenstrukturen LaborW 
-Werkstoffe, Bauelemente, Halbleiter Labor 
-Werkstoffe, Bauelemente, Halbleiter Labor 
-Elektrotechnik 2 LaborW3
-Datenbanken 
-Mathematik 2 für Informatik 
-Mathematik 2 für Informatik 
-Objektorientierte Programmierung 
-Algorithmen und Datenstrukturen Übung 
-Datenbanken 
-Web-Anwendungen 
-Mathematik 2 Übung 
-Datenbanken Labor 
-Web-Anwendungen Labor 
-Objektorientierte Programmierung Labor 
-Algorithmen und Datenstrukturen Labor 
-Web-Anwendungen Labor 
-Schwerpunktswahl und Vorstellung Informatik
-Datenbanken Labor 
-Mathematik 2 Übung 
-Algorithmen und Datenstrukturen Labor 
-Web-Anwendungen Labor 
-Algorithmen und Datenstrukturen Übung 
-Objektorientierte Programmierung Labor 
-Web-Anwendungen Labor 
-Datenbanken Labor 
-Web-Anwendungen Labor 
-Objektorientierte Programmierung Labor 
-Algorithmen und Datenstrukturen Labor 
-Web-Anwendungen Labor 
-Web-Anwendungen Labor 
-Datenbanken Labor 
-Algorithmen und Datenstrukturen Labor 
-Objektorientierte Programmierung Labor 
-Datenbanken Labor 
-Objektorientierte Programmierung Labor 
-Algorithmen und Datenstrukturen Labor 
-Web-Anwendungen Labor 
-Computer Aided Design (CAD) 
-Elektrotechnik 2 Übung 
-Computer Aided Design (CAD) Labor
-Physik Labor-Einführung 
-Rechnergestützte Werkzeuge f.d. Ingwis. 
-Rechnergestützte Werkzeuge f.d. Ingwis. Labor 
-Mathematik 2 Übung 
-Physik Labor  
-Physik Übung 
-Elektrotechnik 2 Labor 
-Mathematik 2 Übung 
-Rechnergestützte Werkzeuge f.d. Ingwis. 
-Elektrotechnik 2 Labor Test 
-Computer Aided Design (CAD) Labor 15
-Rechnergestützte Werkzeuge f.d. Ingwis. Labor 
-Physik Labor  
-Elektrotechnik 2 Labor 
-Audivisuelle Medien Übung
-Objektorientierte Programmierung 
-Audivisuelle Medien Übung
-Präsentationstechniken Labor 
+Elektrotechnik 2 Labor Test
+Algorithmen und Datenstrukturen Labor E2
+Werkstoffe, Bauelemente, Halbleiter Labor E2
+Mathematik 2 Übung E2
+Physik Labor E2
+Algorithmen und Datenstrukturen Übung E2
+Werkstoffe, Bauelemente, Halbleiter Labor E2
+Elektrotechnik 2 Labor E2
+Werkstoffe, Bauelemente, Halbleiter Labor E3
+Algorithmen und Datenstrukturen Labor E3
+Physik Labor E3
+Werkstoffe, Bauelemente, Halbleiter Labor E3
+Elektrotechnik 2 Labor E3
+Physik Labor E4
+Algorithmen und Datenstrukturen Labor E4
+Werkstoffe, Bauelemente, Halbleiter Labor E4
+Werkstoffe, Bauelemente, Halbleiter Labor E4
+Elektrotechnik 2 Labor E4
+Datenbanken
+Mathematik 2 für Informatik
+Mathematik 2 für Informatik
+Objektorientierte Programmierung
+Algorithmen und Datenstrukturen Übung I1
+Datenbanken
+Web-Anwendungen
+Mathematik 2 Übung I1
+Datenbanken Labor I1
+Web-Anwendungen Labor I1
+Objektorientierte Programmierung Labor I1
+Algorithmen und Datenstrukturen Labor I1
+Web-Anwendungen Labor I1
+Schwerpunktswahl und -vorstellung Informatik
+Datenbanken Labor I2
+Mathematik 2 Übung I2
+Algorithmen und Datenstrukturen Labor I2
+Web-Anwendungen Labor I2
+Algorithmen und Datenstrukturen Übung I2
+Objektorientierte Programmierung Labor I2
+Web-Anwendungen Labor I2
+Datenbanken Labor I3
+Web-Anwendungen Labor I3
+Objektorientierte Programmierung Labor I3
+Algorithmen und Datenstrukturen Labor I3
+Web-Anwendungen Labor I3
+Web-Anwendungen Labor I4
+Datenbanken Labor I4
+Algorithmen und Datenstrukturen Labor I4
+Objektorientierte Programmierung Labor I4
+Datenbanken Labor I5
+Objektorientierte Programmierung Labor I5
+Algorithmen und Datenstrukturen Labor I5
+Web-Anwendungen Labor I5
+Computer Aided Design
+Elektrotechnik 2 Übung M1
+Computer Aided Design Labor M1
+Physik Labor Einführung
+Rechnergestützte Werkzeuge f.d. Ingwis.
+Rechnergestützte Werkzeuge f.d. Ingwis. Labor M1
+Mathematik 2 Übung M1
+Physik Labor M1
+Physik Übung M
+Elektrotechnik 2 Labor M1
+Mathematik 2 Übung M1
+Rechnergestützte Werkzeuge f.d. Ingwis.
+Elektrotechnik 2 Labor Test
+Computer Aided Design Labor M2
+Rechnergestützte Werkzeuge f.d. Ingwis. Labor M2
+Physik Labor M2
+Elektrotechnik 2 Labor M2
+Audivisuelle Medien Übung Ming1
+Objektorientierte Programmierung
+Audivisuelle Medien Übung Ming1
+Präsentationstechniken Labor 1
 Multimedia Production
-Elektrotechnik und Messtechnik 
-Elektrotechnik und Messtechnik Übung 
-Objektorientierte Programmierung Labor 
-Web-Anwendungen Labor 
-Elektrotechnik und Messtechnik Laboreinführung 
-Elektrotechnik und Messtechnik Labor 
-Elektrotechnik und Messtechnik 
-Audivisuelle Medien Übung
-Audivisuelle Medien Übung
-Präsentationstechniken Labor 
-Objektorientierte Programmierung Labor 
-Web-Anwendungen Labor 
-Elektrotechnik und Messtechnik Labor 
-Web-Anwendungen Labor 
-Audivisuelle Medien Übung
-Präsentationstechniken Labor 
-Audivisuelle Medien Übung
-Web-Anwendungen Labor 
-Objektorientierte Programmierung Labor 
-Web-Anwendungen Labor 
-Elektrotechnik und Messtechnik Labor 
-Elektrotechnik 2 Übung 
-Betriebliches Rechnungswesen 
-Mathematik 2 Übung 
-Rechnergestützte Werkzeuge f.d. Ingwis. Labor 
-Elektrotechnik 2 Labor 
-Mathematik 2 Übung 
-Vertiefungswahl und Vorstellung Wing 
-Elektrotechnik 2 Labor Test 
-Rechnergestützte Werkzeuge f.d. Ingwis. Labor 
-Elektrotechnik 2 Labor 
-Regelungstechnik 
-BWL und Management 
-Energiewende Überblick und Herausforderungen 
-Elektrische Maschinen 
-Hochspannungstechnik 
-Grundlagen Projektmanagement 
-Hochspannungstechnik Labor  
-Regelungstechnik Übung
-Elektrische Maschinen Labor 
+Elektrotechnik und Messtechnik
+Elektrotechnik und Messtechnik Übung
+Objektorientierte Programmierung Labor Ming1
+Web-Anwendungen Labor Ming1
+Elektrotechnik und Messtechnik Laboreinführung
+Elektrotechnik und Messtechnik Labor Ming1
+Elektrotechnik und Messtechnik
+Audivisuelle Medien Übung Ming2
+Audivisuelle Medien Übung Ming2
+Präsentationstechniken Labor 2
+Objektorientierte Programmierung Labor Ming2
+Web-Anwendungen Labor Ming2
+Elektrotechnik und Messtechnik Labor Ming2
+Web-Anwendungen Labor Ming2
+Audivisuelle Medien Übung Ming3
+Präsentationstechniken Labor Ming3
+Audivisuelle Medien Übung 3
+Web-Anwendungen Labor Ming3
+Objektorientierte Programmierung Labor Ming3
+Web-Anwendungen Labor Ming3
+Elektrotechnik und Messtechnik Labor Ming3
+Elektrotechnik 2 Übung W1
+Betriebliches Rechnungswesen
+Mathematik 2 Übung W1
+Rechnergestützte Werkzeuge f.d. Ingwis. Labor W1
+Elektrotechnik 2 Labor W1
+Mathematik 2 Übung W1
+Vertiefungswahl und -vorstellung Wing
+Elektrotechnik 2 Labor Test
+Rechnergestützte Werkzeuge f.d. Ingwis. Labor W2
+Elektrotechnik 2 Labor W2
+Regelungstechnik E/Wing
+BWL und Management
+Energiewende Überblick und Herausforderungen
+Elektrische Maschinen
+Hochspannungstechnik
+Grundlagen Projektmanagement
+Hochspannungstechnik Labor E1
+Regelungstechnik Übung E/Wing
+Elektrische Maschinen Labor E1
 Karfreitag
 Ostermontag
-Regelungstechnik Labor 
-Grundlagen Projektmanagement 
+Regelungstechnik Labor E1
+Grundlagen Projektmanagement
 Christi Himmelfahrt
 Pfingstmontag
-Grundlagen Projektmanagement 
-Mikrocomputertechnik 
-Datenbanken Labor 
-Mikrocomputertechnik Labor
-Objektorientierte Programmierung Labor 
-Regelungstechnik Labor 
-Einführung in die Digitale Signalverarbeitung 
-Elektronik 2 
-Grundlagen der Übertragungstechnik Labor-Einführung  
-Elektronik 2 
-Grundlagen der Übertragungstechnik 
-Einführung in die Digitale Signalverarbeitung Übung 
-Grundlagen der Übertragungstechnik Labor 
-Einführung in die Digitale Signalverarbeitung Labor
-Grundlagen der Übertragungstechnik Labor 
-Mikrocomputertechnik Labor 
-Elektronik-2 Labor 
-Regelungstechnik Labor 
-Elektronik-2 Labor  
-Grundlagen der Übertragungstechnik Labor Test 
-Einführung in die Digitale Signalverarbeitung Labor 
-Elektronik 2 Labor
-Einführung in die Digitale Signalverarbeitung Labor
-Programmieren in C++ 
-Programmieren in C++ 
-Angewandte Softwarearchitektur 
-Angewandte Softwarearchitektur Labor 
-Testen von Software 
-Agile Entwicklungsmethoden 
-Einführung in die IT-Sicherheit 
-Einführung in die IT-Sicherheit Labor 
-Programmieren in C++ Labor 
-Testen von Software Labor 
-Programmieren in C++ Test 
+Grundlagen Projektmanagement
+Mikrocomputertechnik
+Datenbanken Labor EI/DW
+Mikrocomputertechnik Labor E1+W
+Objektorientierte Programmierung Labor EI-DW
+Regelungstechnik Labor E3W
+Einführung in die digitale Signalverarbeitung
+Elektronik 2
+Grundlagen der Übertragungstechnik Labor Einführung
+Elektronik 2
+Grundlagen der Übertragungstechnik
+Einführung in die digitale Signalverarbeitung Übung EW
+Grundlagen der Übertragungstechnik Labor 1
+Einführung in die digitale Signalverarbeitung Labor E
+Grundlagen der Übertragungstechnik Labor 2
+Mikrocomputertechnik Labor E2
+Elektronik 2 Labor E1
+Regelungstechnik Labor E2
+Elektronik 2 Labor E1
+Grundlagen der Übertragungstechnik Labor Test
+Einführung in die digitale Signalverarbeitung Labor EW
+Elektronik 2 Labor E2WM
+Einführung in die digitale Signalverarbeitung Labor EW
+Programmieren in C++
+Programmieren in C++
+Angewandte Softwarearchitektur
+Angewandte Softwarearchitektur Labor I1
+Testen von Software
+Agile Entwicklungsmethoden
+Einführung in die IT-Sicherheit
+Einführung in die IT-Sicherheit Labor I1
+Programmieren in C++ Labor I1
+Testen von Software Labor I1
+Programmieren in C++ Test
 AEM+PIC Präsentation
-Angewandte Softwarearchitektur Labor 
-Testen von Software Labor 
-Programmieren in C++ Labor 
-Einführung in die IT-Sicherheit Labor 
-Angewandte Softwarearchitektur Labor 
-Testen von Software Labor 
-Programmieren in C++ Labor 
-Einführung in die IT-Sicherheit Labor 
-Einführung in die IT-Sicherheit Labor 
-Applied Deep Learning 
-Programmieren in C++ Labor 
-Testen von Software Labor 
-Applied Deep Learning Labor
-Einführung in die IT-Sicherheit Labor 
-Spezielle Messtechnik Labor-Einführung 
-Regelungstechnik Mech 
-Regelungstechnik Übung 
-Regelungstechnik Labor 
-Englisch
-Spezielle Messtechnik Labor  
-Mikrocomputertechnik Labor 
-Spezielle Messtechnik 
-Regelungstechnik Labor  
-Regelungstechnik Labor 
-Spezielle Messtechnik Labor  
-Mikrocomputertechnik Labor 
-Regelungstechnik Labor  
-Regelungstechnik Labor 
-Spezielle Messtechnik Labor  
-Mikrocomputertechnik Labor 
-Regelungstechnik Labor  
-Kick-Off Seminar
-Testen von Software Labor 
-Datenbanken Labor 
-AEM Projekttag  
-Testen von Software Labor 
-Datenbanken Labor 
-Testen von Software Labor 
-Datenbanken Labor
-Englisch
+Angewandte Softwarearchitektur Labor I2
+Testen von Software Labor I2
+Programmieren in C++ Labor I2
+Einführung in die IT-Sicherheit Labor I2
+Angewandte Softwarearchitektur Labor I3
+Testen von Software Labor I3
+Programmieren in C++ Labor I3
+Einführung in die IT-Sicherheit Labor I3
+Einführung in die IT-Sicherheit Labor I3
+Applied Deep Learning
+Programmieren in C++ Labor I4
+Testen von Software Labor I4
+Applied Deep Learning Labor KI1
+Einführung in die IT-Sicherheit Labor I4
+Spezielle Messtechnik Labor Einführung
+Regelungstechnik Mech
+Regelungstechnik Übung M1
+Regelungstechnik Labor M1
+Englisch B2/Me
+Spezielle Messtechnik Labor M1
+Mikrocomputertechnik Labor M1
+Spezielle Messtechnik
+Regelungstechnik Labor M1
+Regelungstechnik Labor M2
+Spezielle Messtechnik Labor M2
+Mikrocomputertechnik Labor M2
+Regelungstechnik Labor M2
+Regelungstechnik Labor M3
+Spezielle Messtechnik Labor M3
+Mikrocomputertechnik Labor M3
+Regelungstechnik Labor M3
+Zoom Kick-Off Seminar 4. Semester
+Testen von Software Labor Ming1
+Datenbanken Labor Ming1
+AEM Projekttag Ming
+Testen von Software Labor Ming2
+Datenbanken Labor Ming2
+Testen von Software Labor Ming3
+Datenbanken Labor Ming3
+Englisch B1/B2/C1 Wing.
 Solarenergie
-Solarenergie Labor-Einführung 
-Solarenergie Labor  
-Elektrische Maschinen Labor 
-Regelungstechnik Labor 
-Solarenergie Labor
-Kick-Off Seminar
+Solarenergie Labor Einführung
+Solarenergie Labor W1
+Elektrische Maschinen Labor W1
+Regelungstechnik Labor W1
+Solarenergie Labor W2
+Zoom Kick-Off Seminar 6. Semester
