@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
+import os
 import sqlite3
 from ics import Calendar, Event
 
@@ -17,6 +18,10 @@ class FhEvent:
     rooms: list[str]
     source: str
 
+
+# create folder for ics files
+if not os.path.exists("output"):
+    os.makedirs("output")
 
 con = sqlite3.connect("output.db")
 cur = con.cursor()
