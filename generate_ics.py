@@ -1,35 +1,69 @@
+from dataclasses import dataclass
+from datetime import datetime
+import sqlite3
 from ics import Calendar, Event
-import json
 
-input_file = "output.json"
 
-events = json.load(open(input_file, "r", encoding="utf-8"))
+@dataclass
+class FhEvent:
+    id: int
+    title: str
+    category: str
+    degree: str
+    semester: str
+    group: str
+    start: datetime
+    end: datetime
+    rooms: list[str]
+    source: str
 
-# find unique sources
+
+con = sqlite3.connect("output.db")
+cur = con.cursor()
+
+# get all events
+cur.execute("SELECT * FROM events")
+
+# convert to Event objects
+events: list[FhEvent] = []
+for event in cur.fetchall():
+    events.append(
+        FhEvent(
+            id=event[0],
+            title=event[1],
+            category=event[2],
+            degree=event[3],
+            semester=event[4],
+            group=event[5],
+            start=datetime.strptime(event[6], "%Y-%m-%d %H:%M:%S"),
+            end=datetime.strptime(event[7], "%Y-%m-%d %H:%M:%S"),
+            rooms=[event[8], event[9], event[10], event[11], event[12]],
+            source=event[13],
+        )
+    )
+
+# find all unique combinations of semester, degree and group
 unique_sources = set()
 for event in events:
-    s = event["source"].split("[")[0].strip()
-    unique_sources.add(s)
+    unique_sources.add((event.semester, event.degree, event.group))
 
-print(f"Found {len(unique_sources)} unique sources")
-
-# generate a iCalendar file for each source
+# generate one ical file per unique combination
 for source in unique_sources:
-    event_data = {}
-
     cal = Calendar()
     for event in events:
-        if source in event["source"]:
-            event_data = event
+        if (
+            event.semester == source[0]
+            and event.degree == source[1]
+            and event.group == source[2]
+        ):
             e = Event()
-            e.name = event["title"]
-            e.begin = event["start"]
-            e.end = event["end"]
-            e.location = ", ".join(event["rooms"])
+            e.name = event.title
+            e.begin = event.start
+            e.end = event.end
+            e.location = ", ".join(event.rooms)
             cal.events.add(e)
 
-    degree = event_data["degree"]
-
+    degree = source[1]
     if degree.startswith("Elektrotechnik"):
         if "Energie" in degree:
             degree = "e-technik_e"
@@ -48,7 +82,7 @@ for source in unique_sources:
         else:
             degree = "inf"
     if degree.startswith("Mechatronik"):
-        degree = "mecha"
+        degree = "mech"
 
     if degree.startswith("Wirtschaftsingenieurwesen"):
         if "DW" in degree:
@@ -63,12 +97,6 @@ for source in unique_sources:
     if degree.startswith("Medieningenieur"):
         degree = "ming"
 
-    group = event_data["group"]
-    if group == "0":
-        group = ""
-    else:
-        group = f"_{group}"
-
-    file_name = event_data["semester"] + "_" + degree + group
+    file_name = source[0] + "_" + degree + "_" + source[2]
     with open(f"output/{file_name}.ics", "w", encoding="utf-8") as f:
         f.writelines(cal)
