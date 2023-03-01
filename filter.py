@@ -22,6 +22,7 @@ for event in events:
         "start": event[6],
         "end": event[7],
         "rooms": [event[8], event[9], event[10], event[11], event[12]],
+        "source": event[13],
     }
 
     # remove empty rooms
