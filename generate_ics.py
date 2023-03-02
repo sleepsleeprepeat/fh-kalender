@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 import os
 import sqlite3
-from ics import Calendar, Event
+from icalendar import Calendar, Event
 
 
 @dataclass
@@ -40,8 +40,8 @@ for event in cur.fetchall():
             degree=event[3],
             semester=event[4],
             group=event[5],
-            start=datetime.strptime(event[6], "%Y-%m-%d %H:%M:%S"),
-            end=datetime.strptime(event[7], "%Y-%m-%d %H:%M:%S"),
+            start=datetime.fromisoformat(event[6]),
+            end=datetime.fromisoformat(event[7]),
             rooms=[event[8], event[9], event[10], event[11], event[12]],
             source=event[13],
         )
@@ -67,11 +67,11 @@ for source in unique_sources:
                     rooms.append(room)
 
             e = Event()
-            e.name = event.title
-            e.begin = event.start
-            e.end = event.end
-            e.location = ", ".join(rooms)
-            cal.events.add(e)
+            e.add("summary", event.title)
+            e.add("dtstart", event.start)
+            e.add("dtend", event.end)
+            e.add("location", ", ".join(rooms))
+            cal.add_component(e)
 
     degree = source[1]
     if degree.startswith("Elektrotechnik"):
@@ -108,5 +108,6 @@ for source in unique_sources:
         degree = "ming"
 
     file_name = source[0] + "_" + degree + "_" + source[2]
-    with open(f"output/{file_name}.ics", "w", encoding="utf-8") as f:
-        f.writelines(cal)
+    with open(f"output/{file_name}.ics", "wb") as f:
+        f.write(cal.to_ical())
+        f.close()
