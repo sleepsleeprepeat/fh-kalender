@@ -61,11 +61,16 @@ for source in unique_sources:
             and event.degree == source[1]
             and event.group == source[2]
         ):
+            rooms = []
+            for room in event.rooms:
+                if room:
+                    rooms.append(room)
+
             e = Event()
             e.name = event.title
-            e.begin = event.start + timedelta(hours=-1)  # ics uses UTC
-            e.end = event.end + timedelta(hours=-1)  # ics uses UTC
-            e.location = ", ".join(event.rooms)
+            e.begin = event.start
+            e.end = event.end
+            e.location = ", ".join(rooms)
             cal.events.add(e)
 
     degree = source[1]
