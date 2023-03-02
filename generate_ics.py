@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 import sqlite3
 from ics import Calendar, Event
@@ -63,8 +63,8 @@ for source in unique_sources:
         ):
             e = Event()
             e.name = event.title
-            e.begin = event.start
-            e.end = event.end
+            e.begin = event.start + timedelta(hours=-1)  # ics uses UTC
+            e.end = event.end + timedelta(hours=-1)  # ics uses UTC
             e.location = ", ".join(event.rooms)
             cal.events.add(e)
 
