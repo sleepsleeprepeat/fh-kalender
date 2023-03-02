@@ -8,7 +8,7 @@ import pdfplumber
 
 from fh_plan import *
 
-WEEKDAYS = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
+WEEKDAYS = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
 CATEGORY_LAB = ["-ÜL", "ÜL-"]
 CATEGORY_EXERCISES = ["-Ü", "Ü-"]
 
