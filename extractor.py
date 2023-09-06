@@ -13,6 +13,11 @@ class Event:
 
 class Cell:
     def __init__(self, cell) -> None:
+        if cell is None:
+            self.data = None
+            self.sub_rows = None
+            self.is_empty = True
+            return
         self.data = cell
         self.is_empty = self.data.text == ""
         self.sub_rows = self.data.find_all("table", recursive=False)

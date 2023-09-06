@@ -1,7 +1,6 @@
-from extractor import Page
+from extractor import Page, Cell
 from datetime import datetime, timedelta
 from extractor import Event
-
 
 
 class PageParser:
@@ -14,14 +13,26 @@ class PageParser:
         days = self.page.table.get_header()
 
         events = []
+        # create a tabel of all rows and columns
+        table: list[list[Cell]] = []
+        for row in self.page.table.get_rows():
+            table.append(row.get_cells())
+
         rows = self.page.table.get_rows()
-        for row_idx, row in enumerate(rows):
-            for col_idx, cell in enumerate(row.get_cells()):
+        row_errors = 0
+        for row_idx, row in enumerate(table):
+            for col_idx, cell in enumerate(row):
                 if cell.is_empty:
                     continue
 
-                starttime = row.get_time()
-                endtime = rows[(row_idx + cell.get_duration())].get_time()
+                duration = cell.get_duration()
+
+                # insert empty cells in the same column for the duration of the event to the rows below
+                for i in range(1, duration):
+                    table[row_idx + i].insert(col_idx, Cell(None))
+
+                starttime = rows[row_idx].get_time()
+                endtime = rows[(row_idx + duration)].get_time()
 
                 # the index is used to get the day of the week
                 day = days[col_idx]
@@ -29,16 +40,27 @@ class PageParser:
                     start = self.__generate_datetime(year, weeknumber, day, starttime)
                     end = self.__generate_datetime(year, weeknumber, day, endtime)
 
+                    description = cell.get_lecturer()
+                    if cell.get_comment() != "":
+                        description += f" ({cell.get_comment()})"
+
                     events.append(
                         Event(
-                            title=f"{cell.get_titleinfo()} {cell.get_title()}",
+                            title=f"{cell.get_titleinfo()} {cell.get_title().replace('_', ' ')}",
                             start=start,
                             end=end,
                             location=f"{cell.get_intern_room()} {cell.get_extern_room()}",
-                            description=f"{cell.get_lecturer()} ({cell.get_comment()})",
+                            description=description,
                         )
                     )
 
+            if len(row) < 5:
+                row_errors += 1
+
+        if row_errors > 0:
+            print(
+                f"Page: {self.page.header.get_pagetitle()} has {row_errors} rows with errors"
+            )
         return events
 
     def __parse_weeknumbers(self) -> list[int]:

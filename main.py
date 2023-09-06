@@ -9,7 +9,7 @@ from student_parser import PageParser
 
 
 def process_file(path: str) -> dict[str, list[Event]]:
-    html = open(path, "r", encoding="iso8859-1").read().replace("&nbsp;", "")
+    html = open(path, "r", encoding="ISO-8859-1").read().replace("&nbsp;", "")
     soup = BeautifulSoup(html, "html.parser")
 
     # get all tables, group them into pages by pairs of 3 (header, table, footer)
@@ -28,7 +28,7 @@ def process_file(path: str) -> dict[str, list[Event]]:
         groups[title].extend(PageParser(page).get_events())
 
     return groups
-    
+
 
 if __name__ == "__main__":
     for filename in os.listdir("input"):
@@ -37,6 +37,6 @@ if __name__ == "__main__":
 
         print(f"Processing {filename}")
         groups = process_file("input/" + filename)
-        
+
         for title, events in groups.items():
-            IcalExporter(title).export(events)
+            IcalExporter(title.replace(" ", "_")).export(events)
