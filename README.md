@@ -11,9 +11,11 @@ Der Output ist ein `ics` File, welches in den Ordner `output` gespeichert wird.
 
 Andere Formate sind möglich, aber nicht implementiert.
 
+Die Ordner input und output müssen erstellt werden.
+
 ## Usage
 ```bash
-python main.py
+python splus_converter.py
 ```
 
 ## Dependencies
