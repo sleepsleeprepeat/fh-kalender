@@ -1,3 +1,5 @@
 /__pycache__
 /input/*.htm
+/input_files_store/*.htm
+/storage/*.htm
 /output/*.ics
