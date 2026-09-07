@@ -29,18 +29,18 @@ class Page:
     footer: BeautifulSoup
 
 
-def convert_daynames(days: str) -> str:
+def convert_weekdays(days: str) -> list[int]:
     converted = []
     for day in days.split(", "):
         converted.append(
             {
-                "Montag": "Monday",
-                "Dienstag": "Tuesday",
-                "Mittwoch": "Wednesday",
-                "Donnerstag": "Thursday",
-                "Freitag": "Friday",
-                "Samstag": "Saturday",
-                "Sonntag": "Sunday",
+                "Montag": 0,
+                "Dienstag": 1,
+                "Mittwoch": 2,
+                "Donnerstag": 3,
+                "Freitag": 4,
+                "Samstag": 5,
+                "Sonntag": 6,
             }[day]
         )
 
@@ -66,12 +66,11 @@ def convert_year(year_str: str) -> int:
     return int(year_str.split(" ")[1].split("/")[0])
 
 
-def generate_datetime(year: int, weeknumber: int, day: str, time: str) -> datetime:
-    if weeknumber >= 53:
-        weeknumber = weeknumber - 52
-        year += 1
-
-    date = datetime.strptime(f"{year} {weeknumber} {day}", "%Y %W %A")
+def generate_datetime(year: int, weeknumber: int, weekday: int, time: str) -> datetime:
+    # S-Plus uses ISO weeks, counted continuously across the turn of the year
+    date = datetime.fromisocalendar(year, 1, 1) + timedelta(
+        weeks=weeknumber - 1, days=weekday
+    )
     time = datetime.strptime(time, "%H:%M")
     return date + timedelta(hours=time.hour, minutes=time.minute)
 
@@ -103,7 +102,7 @@ def process_page(page: Page) -> list[Event]:
         internal_room = cell_rows[2].find_all("td")[2].text
 
         # process data
-        daynames = convert_daynames(weekday_names)
+        weekdays = convert_weekdays(weekday_names)
         weeknumbers = convert_weeknumbers(weeknumbers_str)
         year = convert_year(semester)
         internal_rooms = [r.strip() for r in internal_room.split(",")]
@@ -121,9 +120,9 @@ def process_page(page: Page) -> list[Event]:
 
         # generate event for each weeknumber
         for weeknumber in weeknumbers:
-            for dayname in daynames:
-                start = generate_datetime(year, weeknumber, dayname, starttime)
-                end = generate_datetime(year, weeknumber, dayname, endtime)
+            for weekday in weekdays:
+                start = generate_datetime(year, weeknumber, weekday, starttime)
+                end = generate_datetime(year, weeknumber, weekday, endtime)
                 event = Event(
                     title=title,
                     titleinfo=titleinfo,
